@@ -5,4 +5,8 @@
 .product-price{
   float: right;
   margin-right: 1%;
+  font-size: x-large;
+}
+.product-details-link:hover{
+  font-size: x-large;
 }

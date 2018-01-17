@@ -1,0 +1,11 @@
+.badge-category-count {
+  float: right;
+  background-color: #afbed1;
+}
+
+.category-name:hover {
+  cursor: pointer;
+  background-color: #90f5ff;
+  color: #FFFFFF;
+}
+
