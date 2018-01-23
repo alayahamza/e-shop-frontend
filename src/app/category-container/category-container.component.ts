@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../category';
+import {CategoryService} from '../category.service';
+import {ComponentConnectorService} from '../component-connector.service';
 
 @Component({
   selector: 'app-category-container',
@@ -8,21 +10,31 @@ import {Category} from '../category';
 })
 export class CategoryContainerComponent implements OnInit {
 
-  constructor() {
+  constructor(private categoryService: CategoryService, private componentConnectorService: ComponentConnectorService) {
   }
 
   categories: Category[] = [];
+  currentCategory: Category;
 
   ngOnInit() {
-    for (let counter = 0; counter < 6; counter++) {
-      const category: Category = {
-        id: counter,
-        name: 'category ' + counter,
-        description: '',
-        products: counter * 10
-      };
-      this.categories.push(category);
-    }
+    this.getCategories();
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      this.currentCategory = categories[0];
+      this.sendMessage();
+    });
+  }
+
+  sendMessage(): void {
+    this.componentConnectorService.sendMessage(this.currentCategory);
+  }
+
+  updateCategory(category: Category) {
+    this.currentCategory = category;
+    this.sendMessage();
   }
 
 }

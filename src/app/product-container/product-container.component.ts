@@ -1,28 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Product} from '../product';
+import {ProductService} from '../product.service';
+import {Subscription} from 'rxjs/Subscription';
+import {ComponentConnectorService} from '../component-connector.service';
 
 @Component({
   selector: 'app-product-container',
   templateUrl: './product-container.component.html',
   styleUrls: ['./product-container.component.css']
 })
-export class ProductContainerComponent implements OnInit {
+export class ProductContainerComponent implements OnInit, OnDestroy {
+  @Input() searchText: string;
   products: Product[] = [];
+  currentCategory: any;
+  subscription: Subscription;
 
-  product: Product = {
-    id: 1,
-    title: 'Product',
-    description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    price: 1
-  };
-
-  constructor() {
+  constructor(private productService: ProductService, private componentConnectorService: ComponentConnectorService) {
+    this.subscription = this.componentConnectorService.getMessage().subscribe(category => {
+      this.currentCategory = category;
+    });
   }
 
   ngOnInit() {
-    for (let counter = 0; counter < 10; counter++) {
-      this.products.push(this.product);
-    }
+    this.getProducts();
   }
 
+  getProducts(): void {
+    this.productService.getProducts().subscribe(products => this.products = products);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

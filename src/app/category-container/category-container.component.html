@@ -1,7 +1,7 @@
 <li *ngFor="let category of categories"
     class="category-name list-group-item list-group-item-action justify-content-between"
-    [class.active]="clicked === category"
-    (click)="clicked = (clicked === category ? null :category)">
+    [class.active]="currentCategory === category"
+    (click)="currentCategory = (currentCategory === category ? null :category); updateCategory(currentCategory)">
   <span><b>{{category.name}}</b></span>
   <span class="badge badge-default badge-pill badge-category-count">{{category.products}}</span>
 </li>

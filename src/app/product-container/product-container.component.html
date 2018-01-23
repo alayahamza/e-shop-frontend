@@ -1,5 +1,5 @@
-<div class="row cards-container" id="style-1">
-  <div class="col-4"  *ngFor="let product of products">
-    <app-product [product]="product"></app-product>
-  </div>
+<div class="row cards-container" id="cards-container">
+  <app-product *ngFor="let product of products | filter : searchText" [product]="product"
+               [currentCategory]="currentCategory"
+               [hidden]="!currentCategory || !(currentCategory.id === product.category.id) "></app-product>
 </div>

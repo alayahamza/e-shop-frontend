@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-inverse bg-inverse">
         <a class="navbar-brand" href="#">eShop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,9 +13,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="#"><i class="fa fa-home fa-4" aria-hidden="true"></i> <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">-->
               <!--<a class="nav-link" href="#">Link</a>-->
-            </li>
+            <!--</li>-->
             <!--<li class="nav-item dropdown">-->
             <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
             <!--aria-haspopup="true" aria-expanded="false">-->
@@ -35,7 +35,7 @@
         <div class="col-md-3">
           <div class="list-group">
             <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search products" aria-label="Search" [(ngModel)]="searchText" name="search-text">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <br>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="col-md-9">
-          <app-product-container></app-product-container>
+          <app-product-container [(searchText)]="searchText"></app-product-container>
         </div>
       </div>
       <div class="row">
