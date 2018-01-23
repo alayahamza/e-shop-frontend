@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class CategoryService {
 
-  private categoriesUrl = 'http://localhost:8080/categories';
+  private categoriesUrl = 'https://e-shop-backend.herokuapp.com/categories';
   private currentCategory: Category;
 
   constructor(private http: HttpClient) {

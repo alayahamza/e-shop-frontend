@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class ProductService {
 
-  private productsUrl = 'http://localhost:8080/products';
+  private productsUrl = 'https://e-shop-backend.herokuapp.com/products';
 
   constructor(private http: HttpClient) {
   }
