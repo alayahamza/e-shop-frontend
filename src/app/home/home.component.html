@@ -1,0 +1,15 @@
+<div class="row main-content">
+  <div class="col-md-3">
+    <div class="list-group">
+      <form class="form-horizontal">
+        <input class="form-control" type="search" placeholder="Search products" aria-label="Search"
+               [(ngModel)]="searchText" name="search-text" autofocus>
+        <br>
+        <app-category-container></app-category-container>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <app-product-container [(searchText)]="searchText"></app-product-container>
+  </div>
+</div>

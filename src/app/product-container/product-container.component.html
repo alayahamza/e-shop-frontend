@@ -1,5 +1,6 @@
-<div class="row cards-container" id="cards-container">
-  <app-product *ngFor="let product of products | filter : searchText" [product]="product"
-               [currentCategory]="currentCategory"
-               [hidden]="!currentCategory || !(currentCategory.id === product.category.id) "></app-product>
+<div class="row cards-container" id="cards-container" *ngIf="currentCategory">
+    <app-product *ngFor="let product of products | filterCategoryAndTitleAndDescription: searchText:currentCategory.id"
+                 [product]="product"
+                 [currentCategory]="currentCategory">
+    </app-product>
 </div>

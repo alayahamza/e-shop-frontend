@@ -3,6 +3,7 @@ import {Product} from '../product';
 import {ProductService} from '../product.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ComponentConnectorService} from '../component-connector.service';
+import {Category} from '../category';
 
 @Component({
   selector: 'app-product-container',
@@ -12,7 +13,7 @@ import {ComponentConnectorService} from '../component-connector.service';
 export class ProductContainerComponent implements OnInit, OnDestroy {
   @Input() searchText: string;
   products: Product[] = [];
-  currentCategory: any;
+  currentCategory: Category;
   subscription: Subscription;
 
   constructor(private productService: ProductService, private componentConnectorService: ComponentConnectorService) {

@@ -14,7 +14,9 @@ export class ComponentConnectorService {
   private subject = new Subject<any>();
 
   sendMessage(currentCategory: Category) {
-    this.subject.next(currentCategory);
+    if (currentCategory !== null) {
+      this.subject.next(currentCategory);
+    }
   }
 
   getMessage(): Observable<any> {

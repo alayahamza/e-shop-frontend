@@ -12,7 +12,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ComponentConnectorService} from './component-connector.service';
 import {FilterProductsPipe} from './filter.products.pipe';
-
+import {ProductDetailComponent} from './product-detail/product-detail.component';
+import {AppRoutingModule} from './/app-routing.module';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,15 @@ import {FilterProductsPipe} from './filter.products.pipe';
     ProductComponent,
     ProductContainerComponent,
     CategoryContainerComponent,
-    FilterProductsPipe
+    FilterProductsPipe,
+    ProductDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ComponentConnectorService, CategoryService, ProductService],
   bootstrap: [AppComponent]
