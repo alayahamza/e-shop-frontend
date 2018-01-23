@@ -8,5 +8,6 @@
   font-size: x-large;
 }
 .product-details-link:hover{
-  font-size: x-large;
+  background-color: azure;
+  color: #555555;
 }

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <nav class="navbar navbar-expand-lg navbar-inverse bg-inverse">
-        <a class="navbar-brand" href="#">eShop</a>
+        <a class="navbar-brand" routerLink="/home">eShop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"><i class="fa fa-home fa-4" aria-hidden="true"></i> <span class="sr-only">(current)</span></a>
+              <a class="nav-link" routerLink="/home"><i class="fa fa-home fa-4" aria-hidden="true"></i> <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item">-->
             <!--<a class="nav-link" href="#">Link</a>-->
@@ -30,23 +30,20 @@
             <!--</li>-->
           </ul>
         </div>
+        <div class="text-center center-block">
+          <a href="#"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+          <a href="#"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+          <a href="#"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+          <a href="#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+          <i class="home-shopping-cart fa fa-shopping-cart fa-2x" aria-hidden="true" placement="bottom" ngbTooltip="My cart"></i>
+        </form>
       </nav>
+
       <router-outlet></router-outlet>
       <div class="row">
         <div class="col-md-12">
-          <footer>
-            <div class="row">
-              <hr>
-              <div class="text-center center-block">
-                <p class="txt-railway">- eShop -</p>
-                <a href="#"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-                <a href="#"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-                <a href="#"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-                <a href="#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-              </div>
-              <hr>
-            </div>
-          </footer>
         </div>
       </div>
     </div>

@@ -1,5 +1,63 @@
-<div class="row">
-  <div class="col-md-12">
-    <!--<h3>{{product.title}}</h3>-->
+<div class="col-md-12" *ngIf="product">
+  <div class="row product-details-container">
+    <div class="col-md-3">
+      <table class="product-details-table">
+        <tbody class="table table-bordered table-responsive-md">
+        <tr>
+          <td><b>Product id</b></td>
+          <td class="table-details-column-val">{{product.id}}</td>
+        </tr>
+        <tr>
+          <td><b>Title</b></td>
+          <td class="table-details-column-val">{{product.title}}</td>
+        </tr>
+        <tr>
+          <td><b>Description</b></td>
+          <td class="table-details-column-val">{{product.description}}</td>
+        </tr>
+        <tr>
+          <td><b>Price</b></td>
+          <td class="table-details-column-val">{{product.price}} <i class="fa fa-usd" aria-hidden="true"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <h4 class="card-title text-center">{{product.title}}</h4>
+        <div class="card-body">
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              <img src="../assets/placeholder-1.jpg" class="img-fluid" alt="Responsive image">
+              <div class="carousel-caption">
+                <h3>First slide label</h3>
+                <p>{{product.description}}</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <img src="../assets/placeholder-2.jpg" class="img-fluid" alt="Responsive image">
+              <div class="carousel-caption">
+                <h3>Second slide label</h3>
+                <p>{{product.description}}</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <img src="../assets/placeholder-4.png" class="img-fluid" alt="Responsive image">
+              <div class="carousel-caption">
+                <h3>Third slide label</h3>
+                <p>{{product.description}}</p>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+          <div>
+            <br>
+            <button type="button" class="btn btn-outline-secondary" placement="top" ngbTooltip="Add to cart">
+              <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+            </button>
+            <span class="product-price">{{product.price}} <i class="fa fa-usd" aria-hidden="true"></i></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
   </div>
 </div>

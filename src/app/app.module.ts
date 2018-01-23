@@ -15,6 +15,7 @@ import {FilterProductsPipe} from './filter.products.pipe';
 import {ProductDetailComponent} from './product-detail/product-detail.component';
 import {AppRoutingModule} from './/app-routing.module';
 import {HomeComponent} from './home/home.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HomeComponent} from './home/home.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot(),
   ],
   providers: [ComponentConnectorService, CategoryService, ProductService],
   bootstrap: [AppComponent]
