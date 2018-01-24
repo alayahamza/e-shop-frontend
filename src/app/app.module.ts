@@ -16,6 +16,8 @@ import {ProductDetailComponent} from './product-detail/product-detail.component'
 import {AppRoutingModule} from './/app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CartComponent } from './cart/cart.component';
+import {AngularWebStorageModule} from 'angular-web-storage';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CategoryContainerComponent,
     FilterProductsPipe,
     ProductDetailComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    AngularWebStorageModule
   ],
   providers: [ComponentConnectorService, CategoryService, ProductService],
   bootstrap: [AppComponent]

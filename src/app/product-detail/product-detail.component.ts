@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../product.service';
 import {Product} from '../product';
+import {Cart, CartElement} from '../cart';
+import {LocalStorageService, SessionStorageService} from 'angular-web-storage';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime} from 'rxjs/operator/debounceTime';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,12 +14,25 @@ import {Product} from '../product';
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
+  cart: Cart;
+  private _success = new Subject<string>();
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  displaySuccessAlert = false;
+  successMessage: string;
+
+  constructor(private route: ActivatedRoute, private productService: ProductService, public local: LocalStorageService) {
   }
 
   ngOnInit() {
     this.getProductById();
+    this.cart = this.local.get('cart');
+    if (this.cart === null || this.cart === undefined) {
+      this.cart = new Cart();
+      this.cart.products = [];
+      this.cart.total = 0;
+    }
+    setTimeout(() => this.displaySuccessAlert = false, 5000);
+    this._success.subscribe((message) => this.successMessage = message);
   }
 
   getProductById() {
@@ -24,4 +41,52 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProductById(productId).subscribe(product => this.product = product);
 
   }
+
+  addToCart(product: Product) {
+    if (this.productExistsInCart(product)) {
+      this.addExistingProductToCart(product);
+    } else {
+      const productToAdd = new CartElement();
+      productToAdd.item = product;
+      productToAdd.quantity = 1;
+      if (this.cart.products === null || this.cart.products === undefined) {
+        this.cart.products = [];
+        this.cart.total = 0;
+      }
+      this.cart.products.push(productToAdd);
+      this.cart.total += product.price;
+    }
+    this.local.set('cart', this.cart, 3600, 's');
+    this.displaySuccessAlert = true;
+  }
+
+  productExistsInCart(product: Product) {
+    let exists = false;
+    if (this.cart === null || this.cart === undefined) {
+      return false;
+    } else if (this.cart.products === null || this.cart.products === undefined) {
+      return false;
+    } else {
+      let counter = 0;
+      while (!exists && counter < this.cart.products.length) {
+        if (this.cart.products[counter].item.id === product.id) {
+          exists = true;
+        }
+        counter++;
+      }
+
+    }
+    return exists;
+  }
+
+  addExistingProductToCart(product: Product) {
+    console.log(this.cart);
+    this.cart.products.forEach(function (cartItem) {
+      if (cartItem.item.id === product.id) {
+        cartItem.quantity++;
+      }
+    });
+    this.cart.total += product.price;
+  }
+
 }
