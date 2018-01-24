@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Product} from './product';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -11,10 +12,11 @@ const httpOptions = {
 
 @Injectable()
 export class ProductService {
-
-  private productsUrl = 'https://e-shop-backend.herokuapp.com/products';
+  private API_URL = environment.API_URL;
+  private productsUrl: string;
 
   constructor(private http: HttpClient) {
+    this.productsUrl = this.API_URL + '/products';
   }
 
   getProducts(): Observable<Product[]> {

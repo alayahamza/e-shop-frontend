@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Category} from './category';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -11,11 +12,12 @@ const httpOptions = {
 
 @Injectable()
 export class CategoryService {
-
-  private categoriesUrl = 'https://e-shop-backend.herokuapp.com/categories';
+  private API_URL = environment.API_URL;
+  private categoriesUrl: string;
   private currentCategory: Category;
 
   constructor(private http: HttpClient) {
+    this.categoriesUrl = this.API_URL + '/categories';
   }
 
   getCategories(): Observable<Category[]> {
