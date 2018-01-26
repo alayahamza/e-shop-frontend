@@ -15,6 +15,7 @@ export class ProductContainerComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   currentCategory: Category;
   subscription: Subscription;
+  displayProductContainerSpinner: boolean;
 
   constructor(private productService: ProductService, private componentConnectorService: ComponentConnectorService) {
     this.subscription = this.componentConnectorService.getMessage().subscribe(category => {
@@ -23,11 +24,17 @@ export class ProductContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.displayProductContainerSpinner = true;
     this.getProducts();
   }
 
   getProducts(): void {
-    this.productService.getProducts().subscribe(products => this.products = products);
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+      if (this.products.length !== 0) {
+        this.displayProductContainerSpinner = false;
+      }
+    });
   }
 
   ngOnDestroy() {

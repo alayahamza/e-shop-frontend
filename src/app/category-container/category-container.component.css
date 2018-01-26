@@ -1,6 +1,8 @@
 .badge-category-count {
-  float: right;
+  float: left;
   background-color: #afbed1;
+  margin-right: 1%;
+  margin-top: 1%;
 }
 
 .category-name:hover {
@@ -9,3 +11,10 @@
   color: #FFFFFF;
 }
 
+.category-container-spinner {
+  margin-top: 30%;
+}
+
+.category-arrow {
+  float: right;
+}

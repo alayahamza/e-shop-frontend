@@ -22,3 +22,7 @@
   height: 80vh;
   overflow-y: scroll;
 }
+
+.product-container-spinner{
+  margin-top: 30%;
+}

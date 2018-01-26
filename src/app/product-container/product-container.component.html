@@ -1,3 +1,4 @@
+<div class="text-center product-container-spinner" [hidden]="!displayProductContainerSpinner"><i class="fa fa fa-spinner fa-spin"></i></div>
 <div class="row cards-container" id="cards-container" *ngIf="currentCategory">
     <app-product *ngFor="let product of products | filterCategoryAndTitleAndDescription: searchText:currentCategory.id"
                  [product]="product"

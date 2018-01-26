@@ -9,6 +9,7 @@ import {ComponentConnectorService} from '../component-connector.service';
   styleUrls: ['./category-container.component.css']
 })
 export class CategoryContainerComponent implements OnInit {
+  displayCategoryContainerSpinner: boolean;
 
   constructor(private categoryService: CategoryService, private componentConnectorService: ComponentConnectorService) {
   }
@@ -17,6 +18,7 @@ export class CategoryContainerComponent implements OnInit {
   currentCategory: Category;
 
   ngOnInit() {
+    this.displayCategoryContainerSpinner = true;
     this.getCategories();
   }
 
@@ -25,6 +27,9 @@ export class CategoryContainerComponent implements OnInit {
       this.categories = categories;
       this.currentCategory = categories[0];
       this.sendMessage();
+      if (this.categories.length !== 0) {
+        this.displayCategoryContainerSpinner = false;
+      }
     });
   }
 
