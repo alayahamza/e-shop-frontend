@@ -1,11 +1,11 @@
 import {Product} from './product';
 
 export class Cart {
-  products: CartElement[];
+  products: CartItem[];
   total: number;
 }
 
-export class CartElement {
+export class CartItem {
   item: Product;
   quantity: number;
 }

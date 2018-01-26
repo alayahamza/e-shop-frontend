@@ -2,6 +2,10 @@
            (close)="displaySuccessAlert = false">
   Item successfully added to cart!
 </ngb-alert>
+<ngb-alert class="text-center" type="info" *ngIf="displayItemExistsAlert"
+           (close)="displayItemExistsAlert = false">
+  Item is already in your cart!
+</ngb-alert>
 <div class="col-md-12" *ngIf="product">
   <div class="row product-details-container">
     <div class="col-md-3">

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../product.service';
 import {Product} from '../product';
-import {Cart, CartElement} from '../cart';
+import {Cart, CartItem} from '../cart';
 import {LocalStorageService} from 'angular-web-storage';
 import {Subject} from 'rxjs/Subject';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   private _success = new Subject<string>();
 
   displaySuccessAlert = false;
+  displayItemExistsAlert = false;
   successMessage: string;
 
   constructor(private route: ActivatedRoute, private productService: ProductService, public local: LocalStorageService,
@@ -48,9 +49,9 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(product: Product) {
     if (this.productExistsInCart(product)) {
-      this.addExistingProductToCart(product);
+      this.displayItemAlreadyExistsAlert();
     } else {
-      const productToAdd = new CartElement();
+      const productToAdd = new CartItem();
       productToAdd.item = product;
       productToAdd.quantity = 1;
       if (this.cart.products === null || this.cart.products === undefined) {
@@ -59,9 +60,9 @@ export class ProductDetailComponent implements OnInit {
       }
       this.cart.products.push(productToAdd);
       this.cart.total += product.price;
+      this.displaySuccessAlert = true;
     }
     this.local.set('cart', this.cart, 3600, 's');
-    this.displaySuccessAlert = true;
   }
 
   productExistsInCart(product: Product) {
@@ -78,19 +79,12 @@ export class ProductDetailComponent implements OnInit {
         }
         counter++;
       }
-
     }
     return exists;
   }
 
-  addExistingProductToCart(product: Product) {
-    console.log(this.cart);
-    this.cart.products.forEach(function (cartItem) {
-      if (cartItem.item.id === product.id) {
-        cartItem.quantity++;
-      }
-    });
-    this.cart.total += product.price;
+  displayItemAlreadyExistsAlert() {
+    this.displayItemExistsAlert = true;
+    setTimeout(() => this.displayItemExistsAlert = false, 5000);
   }
-
 }
