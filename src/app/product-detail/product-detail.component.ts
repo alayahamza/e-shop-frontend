@@ -3,14 +3,15 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../product.service';
 import {Product} from '../product';
 import {Cart, CartElement} from '../cart';
-import {LocalStorageService, SessionStorageService} from 'angular-web-storage';
+import {LocalStorageService} from 'angular-web-storage';
 import {Subject} from 'rxjs/Subject';
-import {debounceTime} from 'rxjs/operator/debounceTime';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
+  providers: [NgbRatingConfig]
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
@@ -20,7 +21,10 @@ export class ProductDetailComponent implements OnInit {
   displaySuccessAlert = false;
   successMessage: string;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, public local: LocalStorageService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService, public local: LocalStorageService,
+              config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
   }
 
   ngOnInit() {

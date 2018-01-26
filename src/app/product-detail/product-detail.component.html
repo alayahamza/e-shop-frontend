@@ -29,6 +29,9 @@
     <div class="col-md-7">
       <div class="card">
         <h4 class="card-title text-center">{{product.title}}</h4>
+        <div class="text-center">
+          <ngb-rating [(rate)]="product.rate" [readonly]="true"></ngb-rating>
+        </div>
         <div class="card-body">
           <ngb-carousel>
             <ng-template ngbSlide>

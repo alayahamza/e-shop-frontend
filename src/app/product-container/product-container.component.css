@@ -9,6 +9,7 @@
 {
   width: 12px;
   background-color: #F5F5F5;
+  /*display: none;*/
 }
 
 #cards-container::-webkit-scrollbar-thumb
