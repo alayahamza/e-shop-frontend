@@ -14,11 +14,11 @@
       <span *ngIf="cart.products.length ===0">You have no items in your cart.</span>
       <table *ngIf="cart.products.length !==0" class="cart-table table table-hover table-bordered text-center">
         <tbody>
-        <tr *ngFor="let cartItem of cart.products ; let i = index">
+        <tr *ngFor="let cartItem of cart.products">
           <td class="cart-product-count">
             <input type="number" min="{{minNumCartProduct}}" max="{{maxNumCartProduct}}"
                    [(ngModel)]="cartItem.quantity"
-                   (change)="updateCart()">
+                   (blur)="updateCart()">
           </td>
           <td>{{cartItem.item.title}}</td>
           <td>{{cartItem.item.price}} <span><i class="fa fa-usd" aria-hidden="true"></i></span></td>
