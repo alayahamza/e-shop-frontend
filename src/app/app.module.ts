@@ -18,6 +18,7 @@ import {HomeComponent} from './home/home.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './cart/cart.component';
 import {AngularWebStorageModule} from 'angular-web-storage';
+import { PaypalComponent } from './paypal/paypal.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {AngularWebStorageModule} from 'angular-web-storage';
     FilterProductsPipe,
     ProductDetailComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    PaypalComponent
   ],
   imports: [
     BrowserModule,

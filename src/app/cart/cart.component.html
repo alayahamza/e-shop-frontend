@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="row cart-container">
     <div class="col-md-1"></div>
-    <div class="col-md-4 cart-details">
+    <div class="col-md-10 cart-details">
       <span class="text-left">
         <i class="fa fa-shopping-cart fa-2x" aria-hidden="true" placement="bottom"
            ngbTooltip="My cart"></i>
@@ -11,6 +11,7 @@
            ngbTooltip="Clear cart" (click)="clearCart()"></i>
         </span>
       <hr>
+      <app-paypal [(cartTotal)]="cart.total"></app-paypal>
       <span *ngIf="cart.products.length ===0">You have no items in your cart.</span>
       <table *ngIf="cart.products.length !==0" class="cart-table table table-hover table-bordered text-center">
         <tbody>
@@ -35,16 +36,17 @@
       <hr>
       <b>TOTAL :</b> <span class="cart-total">{{cart.total}} <i class="fa fa-usd" aria-hidden="true"></i></span>
     </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-4 payment-container">
-      <i class="fa fa-cc-mastercard  fa-2x" aria-hidden="true" placement="top"
-         ngbTooltip="mastercard"></i>
-      <i class="fa fa-cc-visa  fa-2x" aria-hidden="true" placement="top"
-         ngbTooltip="visa"></i>
-      <i class="fa fa-cc-paypal  fa-2x" aria-hidden="true" placement="top"
-         ngbTooltip="paypal"></i>
-      <hr>
-    </div>
+    <!--<div class="col-md-2"></div>-->
+    <!--<div class="col-md-4 payment-container">-->
+    <!--&lt;!&ndash;<i class="fa fa-cc-mastercard  fa-2x" aria-hidden="true" placement="top"&ndash;&gt;-->
+    <!--&lt;!&ndash;ngbTooltip="mastercard"></i>&ndash;&gt;-->
+    <!--&lt;!&ndash;<i class="fa fa-cc-visa  fa-2x" aria-hidden="true" placement="top"&ndash;&gt;-->
+    <!--&lt;!&ndash;ngbTooltip="visa"></i>&ndash;&gt;-->
+    <!--<i class="fa fa-cc-paypal  fa-2x" aria-hidden="true" placement="top"-->
+    <!--ngbTooltip="paypal"></i>-->
+    <!--<hr>-->
+    <!--<app-paypal></app-paypal>-->
+    <!--</div>-->
     <div class="col-md-1"></div>
   </div>
 </div>
