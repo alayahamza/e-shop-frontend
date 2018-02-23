@@ -40,4 +40,24 @@ export class ProductService {
     );
   }
 
+  addProduct(productToAdd: Product) {
+    return this.http.post<Product>(this.productsUrl, productToAdd, httpOptions)
+      .pipe(
+        catchError(this.handleError('addProduct', productToAdd))
+      );
+  }
+
+  editProduct(productToEdit: Product) {
+    return this.http.patch<Product>(this.productsUrl, productToEdit, httpOptions)
+      .pipe(
+        catchError(this.handleError('editProduct', productToEdit))
+      );
+  }
+
+  deleteProduct(productToDelete: Product) {
+    return this.http.delete(`${this.productsUrl}/${productToDelete.id}`, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteProduct', httpOptions))
+      );
+  }
 }
