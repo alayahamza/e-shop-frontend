@@ -1,0 +1,131 @@
+<br>
+
+<div class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item add-product-btn" (click)="displayAdd()"><i class="fa fa-plus-circle"></i>
+        Add product
+        <i class="fa fa-chevron-right admin-tab-indicator" *ngIf="displayAddForm"></i>
+      </li>
+      <li class="list-group-item edit-product-btn" (click)="displayEdit()"><i class="fa fa-pencil-square"></i>
+        Edit product
+        <i class="fa fa-chevron-right admin-tab-indicator" *ngIf="displayEditForm"></i>
+      </li>
+      <li class="list-group-item delete-product-btn" (click)="displayDelete()"><i class="fa fa-trash"></i>
+        Delete product
+        <i class="fa fa-chevron-right admin-tab-indicator" *ngIf="displayDeleteForm"></i>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6" *ngIf="displayAddForm">
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    <div class="text-center" *ngIf="displayAddProductSpinner"><i class="fa fa fa-spinner fa-spin fa-5x"></i></div>
+    <form name="addProductForm" *ngIf="!displayAddProductSpinner">
+      <div class="form-group">
+        <label for="productToAddTitle">Product title*</label>
+        <input type="text" class="form-control" id="productToAddTitle" aria-describedby="productToAddTitle"
+               placeholder="Product title" name="productToAddTitle" [(ngModel)]="productToAdd.title" autofocus required>
+      </div>
+      <div class="form-group">
+        <label for="productToAddDescription">Product description*</label>
+        <input type="text" class="form-control" id="productToAddDescription" name="productToAddDescription"
+               placeholder="Product description"
+               [(ngModel)]="productToAdd.description" required>
+      </div>
+      <div class="form-group">
+        <label for="productToAddPrice">Price*</label>
+        <input type="number" class="form-control" id="productToAddPrice" min="0" name="productToAddPrice"
+               [(ngModel)]="productToAdd.price" required>
+      </div>
+      <div class="form-group">
+        <label for="productToAddCategory">Category*</label>
+        <select class="form-control" id="productToAddCategory" name="productToAddCategoryId"
+                [(ngModel)]="productToAdd.categoryId"
+                required>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="addProduct()">Submit</button>
+      <div class="text-danger" *ngIf="displayRequiredFieldsMsg">Fields with (*) are required</div>
+    </form>
+  </div>
+  <div class="col-md-6" *ngIf="displayEditForm">
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    <div class="text-center" *ngIf="displayEditProductSpinner"><i class="fa fa fa-spinner fa-spin fa-5x"></i></div>
+    <form name="searchToEditForm" class="form-horizontal" *ngIf="!displayEditProductSpinner">
+      <div class="form-group">
+        <label for="typeahead-basic">Search for a product:</label>
+        <input name="editSearchCriteria" id="typeahead-basic" type="text" class="form-control"
+               [(ngModel)]="productTitleToSearchEdit"
+               [ngbTypeahead]="search"/>
+      </div>
+
+      <button class="btn btn-primary" (click)="editProduct()">Edit</button>
+    </form>
+    <form name="editProductForm" *ngIf="productToEdit && !displayEditProductSpinner">
+      <hr>
+      <div class="form-group">
+        <label for="productToEditTitle">Product title*</label>
+        <input type="text" class="form-control" id="productToEditTitle" aria-describedby="productTitle"
+               placeholder="Product title" name="productToEditTitle" [(ngModel)]="productToEdit.title" autofocus
+               required>
+      </div>
+      <div class="form-group">
+        <label for="productToEditDescription">Product description*</label>
+        <input type="text" class="form-control" id="productToEditDescription" name="productToEditDescription"
+               placeholder="Product description"
+               [(ngModel)]="productToEdit.description" required>
+      </div>
+      <div class="form-group">
+        <label for="productToEditPrice">Price*</label>
+        <input type="number" class="form-control" id="productToEditPrice" min="0" name="productToEditPrice"
+               [(ngModel)]="productToEdit.price" required>
+      </div>
+      <div class="form-group">
+        <label for="productToEditCategory">Category*</label>
+        <select class="form-control" id="productToEditCategory" name="productEditCategoryId"
+                [(ngModel)]="productToEdit.categoryId"
+                required>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="saveEditedProduct()">Save</button>
+      <div class="text-danger" *ngIf="displayRequiredFieldsMsg">Fields with (*) are required</div>
+    </form>
+  </div>
+  <div class="col-md-6" *ngIf="displayDeleteForm">
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('dismiss')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="!productToDelete">
+        <div class="modal-body text-danger">Product not found !
+        </div>
+      </div>
+      <div *ngIf="productToDelete">
+        <div class="modal-body text-danger">
+          Are you sure you want to delete this product : <b><strong>{{productToDelete.title}}</strong></b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('delete')">Delete</button>
+        </div>
+      </div>
+    </ng-template>
+
+    <form name="searchToDeleteForm" class="form-horizontal">
+      <div class="form-group">
+        <label for="searchForDeleteCriteria">Search for a product:</label>
+        <input name="deleteSearchCriteria" id="searchForDeleteCriteria" type="text" class="form-control"
+               [(ngModel)]="productTitleToSearchDelete"
+               [ngbTypeahead]="search"/>
+      </div>
+      <button class="btn btn-primary" (click)="open(content);searchProductToDelete()"
+              *ngIf="productTitleToSearchDelete !== ''">Delete
+      </button>
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>

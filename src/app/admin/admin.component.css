@@ -1,0 +1,19 @@
+.add-product-btn:hover {
+  background-color: #3fff20;
+  cursor: pointer;
+}
+
+.edit-product-btn:hover {
+  background-color: #58f2ff;
+  cursor: pointer;
+}
+
+.delete-product-btn:hover {
+  background-color: #ff1806;
+  cursor: pointer;
+}
+
+.admin-tab-indicator {
+  float: right;
+  padding-top: 0.4em;
+}
